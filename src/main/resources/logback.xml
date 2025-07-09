@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<configuration scan="false" scanPeriod="60 seconds" debug="false">
+<!--    <contextListener class="com.yum.itsm.common.log.LoggerStartupListener" />-->
+    <!-- <consolePlugin /> -->
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>&lt;%date&gt; [%thread] %-5level %logger{80} - %msg%n
+            </pattern>
+            <charset>UTF-8</charset> <!-- 此处设置字符集 -->
+        </encoder>
+    </appender>
+    <appender name="FileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>logs/sso_%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+            <!-- 单个日志文件最多 10MB, 30天的日志周期，最大不能超过20GB -->
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+            <!-- 例如设置为20GB的话，那么到了这个值，就会删除旧的日志 -->
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{80} - %msg%n
+            </pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+
+<!--    <logger name="com.yum.itsm.office" level="INFO"/>-->
+<!--    <logger name="java.sql" level="debug"></logger>-->
+<!--    <logger name="org.apache.ibatis" level="debug"></logger> -->
+    <root level="INFO">
+       	    <appender-ref ref="stdout"/>
+            <appender-ref ref="FileAppender"/>
+    </root>
+</configuration>
