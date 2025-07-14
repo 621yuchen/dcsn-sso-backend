@@ -2,23 +2,24 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.4</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.7.18</version>
+    <relativePath/>
+</parent>
     <groupId>DCSN</groupId>
     <artifactId>SSO</artifactId>
     <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <name>DCSN-SSO</name>
     <description>DCSN-SSO</description>
+
     <properties>
-        <java.version>17</java.version>
+        <java.version>1.8</java.version>
         <jjwt-version>0.11.2</jjwt-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
     </properties>
 
 
@@ -54,7 +55,7 @@
         <dependency>
             <groupId>com.nimbusds</groupId>
             <artifactId>nimbus-jose-jwt</artifactId>
-            <version>9.11</version> <!-- 版本号根据你的需要进行调整 -->
+            <version>9.11</version>
         </dependency>
 
         <dependency>
@@ -73,48 +74,26 @@
             <version>${jjwt-version}</version>
         </dependency>
     </dependencies>
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.1</version>
+            <configuration>
+                <source>1.8</source>
+                <target>1.8</target>
+                <compilerArgs>
+                    <arg>-Xlint:all</arg>
+                </compilerArgs>
+            </configuration>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>2.22.2</version>
+        </plugin>
+    </plugins>
+</build>
 
-    <build>
-        <plugins>
-<!--            <plugin>-->
-<!--                <groupId>org.springframework.boot</groupId>-->
-<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--            </plugin>-->
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-deploy-plugin</artifactId>-->
-<!--                <version>3.1.1</version>-->
-<!--            </plugin>-->
-
-            <plugin>
-                <groupId>com.microsoft.azure</groupId>
-                <artifactId>azure-webapp-maven-plugin</artifactId>
-                <version>2.13.0</version>
-                <configuration>
-                    <auth>
-                        <environment>azure_china</environment>
-                    </auth>
-<!--                    <subscriptionId>8e88cbe1-2cf1-451b-86f7-eb8b5568f52f</subscriptionId>-->
-                    <schemaVersion>v2</schemaVersion>
-                    <resourceGroup>DSCN-SNOW</resourceGroup>
-                    <appName>DSCN-SSO</appName>
-                    <!-- 设置为中国区域 -->
-<!--                    <region>China East 2</region>-->
-                    <deployment>war</deployment>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-<!--    <distributionManagement>-->
-<!--        <repository>-->
-<!--            <id>central</id>-->
-<!--            <name>artifactory-releases</name>-->
-<!--            <url> </url>-->
-<!--        </repository>-->
-<!--        <snapshotRepository>-->
-<!--            <id>snapshots</id>-->
-<!--            <name>artifactory-snapshots</name>-->
-<!--            <url> </url>-->
-<!--        </snapshotRepository>-->
-<!--    </distributionManagement>-->
 </project>
