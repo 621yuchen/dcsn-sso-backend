@@ -297,7 +297,7 @@ public class QiyuService {
                 // Replace tags with names
                 List<String> tagNames = tagIds.stream()
                         .map(idToNameMap::get)
-                        .toList();
+                        .collect(Collectors.toList());
 
 
 
